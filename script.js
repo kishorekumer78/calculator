@@ -1,36 +1,29 @@
-let firstNum = "";
-let secondNum = "";
-let operator = "";
-let result = "";
-
 let typeNum = "";
 
 let numberButtons = document.querySelectorAll(".number");
 let operatorButtons = document.querySelectorAll(".operator");
 let equalButton = document.querySelector(".equal");
 
+let presentOp = document.querySelector(".presentOp");
+let lastOp = document.querySelector(".lastOp");
+
 numberButtons.forEach((element) => {
   element.addEventListener("click", () => {
-    // add/assign the innertext of button to tupenum
-    typeNum = typeNum + element.textContent;
+    appendNumber(element.textContent);
   });
 });
+
+const appendNumber = (number) => {
+  presentOp.textContent = presentOp.textContent + number;
+};
 
 operatorButtons.forEach((element) => {
   element.addEventListener("click", () => {
-    if (firstNum === "") {
-      firstNum = typeNum;
-      typeNum = "";
-    } else {
-      secondNum = typeNum;
-      typeNum = "";
-    }
-    operator = element.textContent;
+    dispalyLastOp(element.textContent);
+    presentOp.textContent = "";
   });
 });
 
-equalButton.addEventListener("click", (e) => {
-  console.log(`first no : ${firstNum}`);
-  console.log(`second no : ${secondNum}`);
-  console.log(`operator : ${operator}`);
-});
+const dispalyLastOp = (operator) => {
+  lastOp.textContent = `${presentOp.textContent} ${operator}`;
+};
